@@ -13,7 +13,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    models/desktop.cpp
+    models/desktop.cpp \
+    models/notebook.cpp
 
 RESOURCES += res/qml.qrc
 
@@ -29,4 +30,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    models/desktop.h
+    models/desktop.h \
+    models/notebook.h

@@ -24,8 +24,8 @@ ApplicationWindow {
 
     id: appWindow
     visible: true
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     title: qsTr("Desktop")
 
 
@@ -72,6 +72,15 @@ ApplicationWindow {
 
             // ClosedNotebook
             // closed notebook image, clickin on it will open the NoteBook.qml delegate
+            ClosedNotebook{
+                x: 50
+                y: 50
+                width: 200
+                height: 80
+                rotation: 10
+                notebookTitle: desktopModel.notebook.title
+                notebookLength: desktopModel.notebook.length
+            }
 
             // StickyBlock
             // draw a block of stickynoes.
