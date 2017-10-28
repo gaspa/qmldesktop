@@ -72,11 +72,11 @@ ApplicationWindow {
 
             // ClosedNotebook
             // closed notebook image, clickin on it will open the NoteBook.qml delegate
-            ClosedNotebook{
+            NotebookCover {
                 x: 50
                 y: 50
                 width: 200
-                height: 80
+                height: 300
                 rotation: 10
                 notebookTitle: desktopModel.notebook.title
                 notebookLength: desktopModel.notebook.length

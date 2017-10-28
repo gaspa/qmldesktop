@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 
-Item {
+Rectangle {
     // Model interface: //
     property string notebookTitle: "asdfasdfaf";
     property int notebookLength: 0;
@@ -16,7 +16,8 @@ Item {
         {
             id: screw
             width:44
-            height: notebookRoot.height
+            Layout.fillHeight: true
+            clip: true
             source: "qrc:/notebook_screw.jpg"
             fillMode: Image.TileVertically
             verticalAlignment: Image.AlignTop
@@ -31,7 +32,7 @@ Item {
                 id: titleText
                 color: "red"
                 text: notebookTitle
-                anchors.centerIn: parent.Center
+                anchors.centerIn: parent
             }
             Text
             {
@@ -39,6 +40,7 @@ Item {
                 color: "black"
                 text: notebookLength + " pages filled"
                 anchors.top: titleText.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
             }
         }
     }

@@ -6,6 +6,6 @@
         <file>qml/StickyGrid.qml</file>
         <file>desktop_bg.jpg</file>
         <file>notebook_screw.jpg</file>
-        <file>qml/ClosedNotebook.qml</file>
+        <file>qml/NotebookCover.qml</file>
     </qresource>
 </RCC>
