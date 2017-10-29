@@ -42,9 +42,18 @@ ApplicationWindow {
             width: 200
             height: 300
             rotation: 10
+            // model interface bindinds:
             notebookTitle: desktopModel.notebook.title
             notebookLength: desktopModel.notebook.length
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log("showing notebook")
+                    notebook.visible = true;
+                }
+            }
         }
+
 
         // StickyBlock
         // draw a block of stickynoes.
@@ -60,6 +69,13 @@ ApplicationWindow {
         // StickyThumbs
         // StickyNotes (just thumbs, with elided text) positioned around the desktop
 
+        // Notebook:
+        Notebook{
+            id: notebook
+            visible: false
+            anchors.fill: parent
+            notebookModel: desktopModel.notebook
+        }
 
     }
 

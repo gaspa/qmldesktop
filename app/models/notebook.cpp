@@ -13,12 +13,16 @@ QString Notebook::title()
 
 int Notebook::length()
 {
-    return 0;
+    return _pages.length();
 }
 
-QList<Page*> Notebook::pages()
+QList<QObject*> Notebook::pages()
 {
-    return _pages;
+    QList<QObject*> list;
+    for (auto page : _pages) {
+        list.append(page);
+    }
+    return list;
 }
 
 void Notebook::addPage()
