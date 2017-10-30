@@ -7,5 +7,7 @@
         <file>desktop_bg.jpg</file>
         <file>notebook_screw.jpg</file>
         <file>qml/NotebookCover.qml</file>
+        <file>qml/StickyBlock.qml</file>
+        <file>stickyblock.png</file>
     </qresource>
 </RCC>
