@@ -11,11 +11,11 @@ public:
 
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(int length READ length NOTIFY lengthChanged)
-    Q_PROPERTY(QList<Page*> pages READ pages NOTIFY pagesChanged)
+    Q_PROPERTY(QList<QObject*> pages READ pages NOTIFY pagesChanged)
 
     QString title();
     int length();
-    QList<Page*> pages();
+    QList<QObject*> pages();
 
 signals:
     void titleChanged();

@@ -10,11 +10,12 @@ class Page : public QObject {
 public:
     explicit Page(int pagenumber, QObject* parent = nullptr);
 
-    Q_PROPERTY(int pagenumber READ pagenumber)
+    Q_PROPERTY(int pagenumber READ pagenumber CONSTANT)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
-    Q_PROPERTY(QString body READ title WRITE setBody NOTIFY bodyChanged)
+    Q_PROPERTY(QString body READ body WRITE setBody NOTIFY bodyChanged)
     Q_PROPERTY(QDate date READ date NOTIFY dateChanged)
 
+public slots:
     int pagenumber();
     QString title();
     void setTitle(QString title);

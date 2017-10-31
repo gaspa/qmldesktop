@@ -1,9 +1,22 @@
 #include "notebook.h"
+#include <QDate>
 
 Notebook::Notebook(QObject* parent)
     : QObject(parent)
     , _pages()
 {
+    //    Page* p = new Page(0, this);
+    //    p->setTitle("Asdasdfasdf");
+    //    p->setDate(QDate::currentDate());
+    //    p->setBody("lkjjljkjlj\nklkjlkj");
+    //    _pages.append(p);
+    //    emit pagesChanged();
+    //    p = new Page(1, this);
+    //    p->setTitle("pagina 2");
+    //    p->setDate(QDate::currentDate());
+    //    p->setBody("testo di pagina 2");
+    //    _pages.append(p);
+    //    emit pagesChanged();
 }
 
 QString Notebook::title()
@@ -13,12 +26,16 @@ QString Notebook::title()
 
 int Notebook::length()
 {
-    return 0;
+    return _pages.length();
 }
 
-QList<Page*> Notebook::pages()
+QList<QObject*> Notebook::pages()
 {
-    return _pages;
+    QList<QObject*> list;
+    for (auto page : _pages) {
+        list.append(page);
+    }
+    return list;
 }
 
 void Notebook::addPage()
