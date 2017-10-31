@@ -1,10 +1,21 @@
-import QtQuick 2.0
+import QtQuick 2.7
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 1.3
 import QtQuick.Controls 2.2
 
 Pane {
     id: notebookRoot
     // model interface:
     property var notebookModel: []
+
+    Shortcut {
+        sequence: StandardKey.Cancel
+        context: Qt.ApplicationShortcut
+        onActivated: {
+            notebookRoot.visible = false
+        }
+    }
+
     SwipeView {
         id: view
         anchors.fill: parent
@@ -16,11 +27,8 @@ Pane {
 
         Repeater{
             model: notebookModel.pages
-            Rectangle{
-                Text{
-                    text: modelData.title + " - " + modelData.pagenumber;
-                    anchors.centerIn: parent
-                }
+            NotebookPage{
+                page: modelData
             }
         }
     }

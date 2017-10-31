@@ -10,5 +10,6 @@
         <file>qml/StickyBlock.qml</file>
         <file>stickyblock.png</file>
         <file>qml/Notebook.qml</file>
+        <file>qml/NotebookPage.qml</file>
     </qresource>
 </RCC>

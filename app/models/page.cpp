@@ -18,6 +18,8 @@ QString Page::title()
 
 void Page::setTitle(QString title)
 {
+    if (title == _title)
+        return;
     _title = title;
     emit titleChanged();
 }
@@ -29,6 +31,8 @@ QString Page::body()
 
 void Page::setBody(QString body)
 {
+    if (body == _body)
+        return;
     _body = body;
     emit bodyChanged();
 }
