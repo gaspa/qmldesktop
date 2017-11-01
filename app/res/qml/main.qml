@@ -30,8 +30,10 @@ ApplicationWindow {
         Image {
             id: desktop_background
             source: desktopModel.background
-
             anchors.fill: parent
+            fillMode: Image.Tile
+            verticalAlignment: Image.AlignTop
+            horizontalAlignment: Image.AlignLeft
         }
 
         // ClosedNotebook
