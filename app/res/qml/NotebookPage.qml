@@ -15,15 +15,15 @@ ColumnLayout{
         }
         Button{
             text: "date"
+            anchors.verticalCenter: parent.verticalCenterr
             onClicked: {
-                pageCalendar.visible = true
+                pageCalendar.visible = !pageCalendar.visible
             }
         }
         Calendar {
             id: pageCalendar
             visible: false
             minimumDate: new Date(2017, 0, 1)
-            maximumDate: new Date(2018, 0, 1)
             onClicked: {
                 page.setDate(selectedDate)
                 visible = false
