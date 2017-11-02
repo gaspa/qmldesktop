@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.3
 
 Rectangle {
     // Model interface: //
-    property string notebookTitle: "asdfasdfaf";
+    property string notebookTitle: "Memories";
     property int notebookLength: 0;
 
     // end model interface //
@@ -27,18 +27,29 @@ Rectangle {
             color: "white"
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Image{
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+                horizontalAlignment: Image.AlignHCenter
+                verticalAlignment: Image.AlignVCenter
+                source: "qrc:/brina.jpg"
+            }
+
             Text
             {
                 id: titleText
                 color: "red"
                 text: notebookTitle
-                anchors.centerIn: parent
+                font.bold: true
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
             }
             Text
             {
                 id: pagenuberText
                 color: "black"
                 text: notebookLength + " pages filled"
+                font.pointSize: 8
                 anchors.top: titleText.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
             }

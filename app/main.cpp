@@ -1,4 +1,6 @@
+#include <QDebug>
 #include <QFont>
+#include <QFontDatabase>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -11,7 +13,9 @@ int main(int argc, char* argv[])
     QGuiApplication app(argc, argv);
 
     // TODO: do in qml?
-    app.setFont(QFont("Ubuntu", 10));
+    //    QFontDatabase fontdb;
+    //    qDebug() << fontdb.families();
+    app.setFont(QFont("Ubuntu Light", 10));
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("desktopModel", new Desktop());

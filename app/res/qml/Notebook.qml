@@ -26,10 +26,25 @@ Pane {
         }
 
         Repeater{
-            model: notebookModel.pages
-            NotebookPage{
-                page: modelData
+            model: notebookModel.pairs
+            RowLayout{
+                NotebookPage{
+                    page: modelData.left
+                }
+                Image{
+                    id: screw
+                    width:44
+                    Layout.fillHeight: true
+                    clip: true
+                    source: "qrc:/notebook_screw.jpg"
+                    fillMode: Image.TileVertically
+                    verticalAlignment: Image.AlignTop
+                }
+                NotebookPage{
+                    page: modelData.right
+                }
             }
+
         }
     }
     PageIndicator {

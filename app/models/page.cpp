@@ -6,6 +6,15 @@ Page::Page(int pagenumber, QObject* parent)
     _pagenumber = pagenumber;
 }
 
+QVariantMap Page::toMap()
+{
+    QVariantMap map;
+    map.insert("title", _title);
+    map.insert("body", _body);
+    map.insert("date", _date);
+    return map;
+}
+
 int Page::pagenumber()
 {
     return _pagenumber;

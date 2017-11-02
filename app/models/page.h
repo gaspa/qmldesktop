@@ -3,6 +3,7 @@
 
 #include <QDate>
 #include <QObject>
+#include <QVariantMap>
 
 class Page : public QObject {
     Q_OBJECT
@@ -14,6 +15,8 @@ public:
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString body READ body WRITE setBody NOTIFY bodyChanged)
     Q_PROPERTY(QDate date READ date NOTIFY dateChanged)
+
+    QVariantMap toMap();
 
 public slots:
     int pagenumber();

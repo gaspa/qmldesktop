@@ -12,15 +12,18 @@ public:
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(int length READ length NOTIFY lengthChanged)
     Q_PROPERTY(QList<QObject*> pages READ pages NOTIFY pagesChanged)
+    Q_PROPERTY(QList<QObject*> pairs READ pairs NOTIFY pairsChanged)
 
     QString title();
     int length();
     QList<QObject*> pages();
+    QList<QObject*> pairs();
 
 signals:
     void titleChanged();
     void lengthChanged();
     void pagesChanged();
+    void pairsChanged();
 
 public slots:
     void addPage();
