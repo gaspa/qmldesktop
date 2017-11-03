@@ -5,6 +5,7 @@ Page::Page(int pagenumber, bool empty, QObject* parent)
     , _empty(empty)
 {
     _pagenumber = pagenumber;
+    setDate(QDate::currentDate());
 }
 
 bool Page::empty() const
