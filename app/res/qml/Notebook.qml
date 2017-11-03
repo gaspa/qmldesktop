@@ -16,37 +16,66 @@ Pane {
         }
     }
 
-    SwipeView {
-        id: view
+    Rectangle{
         anchors.fill: parent
+        color: "lightgray"
 
-        // TODO: customize background as we prefer... :P
-        background: Rectangle {
-            color: "grey"
-        }
+        ColumnLayout{
+            anchors.fill: parent
 
-        Repeater{
-            model: notebookModel.pairs
             RowLayout{
-                NotebookPage{
-                    page: modelData.left
-                }
-                Image{
-                    id: screw
-                    width:44
-                    Layout.fillHeight: true
-                    clip: true
-                    source: "qrc:/notebook_screw.jpg"
-                    fillMode: Image.TileVertically
-                    verticalAlignment: Image.AlignTop
-                }
-                NotebookPage{
-                    page: modelData.right
+                height: 20
+                Button
+                {
+                    id: newPageButton
+                    text: "add new page..."
+                    onClicked: {
+                        notebookModel.addPage()
+                    }
                 }
             }
 
+            SwipeView {
+                id: view
+                //anchors.fill: parent
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                // TODO: customize background as we prefer... :P
+                background: Rectangle {
+                    color: "grey"
+                }
+
+                Repeater{
+                    model: notebookModel.pairs
+                    RowLayout{
+                        spacing: 0
+                        Layout.margins: 5
+
+                        NotebookPage{
+                            page: modelData.left
+                            Layout.maximumWidth: (view.width - 44) / 2
+                        }
+                        Image{
+                            id: screw
+                            width:44
+                            Layout.fillHeight: true
+                            clip: true
+                            source: "qrc:/notebook_screw.jpg"
+                            fillMode: Image.TileVertically
+                            verticalAlignment: Image.AlignTop
+                        }
+                        NotebookPage{
+                            page: modelData.right
+                            Layout.maximumWidth: (view.width - 44) / 2
+                        }
+                    }
+
+                }
+            }
         }
     }
+
     PageIndicator {
         count: view.count
         currentIndex: view.currentIndex
