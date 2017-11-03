@@ -28,6 +28,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Image{
+                visible: false
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectFit
                 horizontalAlignment: Image.AlignHCenter

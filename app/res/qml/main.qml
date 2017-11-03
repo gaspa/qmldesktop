@@ -1,11 +1,6 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-
-// idea:
-// * desktopObject / desktopModel che contiene tutto il resto
-// * StickyBlock, blcco di postit. -> stickyNote ch
-// * diary uno solo.
 
 
 ApplicationWindow {
@@ -51,7 +46,7 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     console.log("showing notebook")
-                    notebook.visible = true;
+                    notebook.visible = true
                 }
             }
         }
@@ -65,6 +60,13 @@ ApplicationWindow {
             width: 100
             height: 100
             rotation: -20
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log("showing new sticky note")
+                    stickyNoteEditor.open()
+                }
+            }
         }
 
 
@@ -79,6 +81,24 @@ ApplicationWindow {
             notebookModel: desktopModel.notebook
         }
 
+        Dialog{
+            id: stickyNoteEditor
+            parent: ApplicationWindow.overlay
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            closePolicy: Popup.CloseOnEscape
+
+            modal: true
+
+            StickyNote{
+                anchors.centerIn: parent
+                title: "asdfasf"
+                body: "asdfasdfasdf"
+            }
+        }
+
     }
+
+
 
 }

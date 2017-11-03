@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
     // model interface
-    property color bodyColor: 'red'
+    property color bodyColor: 'yellow'
     property string title:''
     property string body: ''
     function save(){}
@@ -11,8 +11,8 @@ Rectangle {
     id: stickyNote
     color: bodyColor
 
-    width: 100
-    height: 100
+    width: 400
+    height: 400
     radius: 10
 
     Rectangle {
@@ -22,6 +22,7 @@ Rectangle {
         Text{
             id: noteTitle
             text: title
+            anchors.centerIn: parent
         }
     }
 
@@ -32,7 +33,7 @@ Rectangle {
         TextEdit {
             anchors.fill: parent
             text: body
-            focus: true
+            textFormat: TextEdit.RichText
         }
     }
 }
