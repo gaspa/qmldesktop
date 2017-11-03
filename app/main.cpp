@@ -18,7 +18,8 @@ int main(int argc, char* argv[])
     app.setFont(QFont("Ubuntu Light", 10));
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("desktopModel", new Desktop());
+    Desktop* desktop = Desktop::load();
+    engine.rootContext()->setContextProperty("desktopModel", desktop);
     engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
