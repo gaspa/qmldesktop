@@ -39,8 +39,10 @@ QString Notebook::title() const
 
 void Notebook::setTitle(QString title)
 {
-    _title = title;
-    emit titleChanged();
+    if (title != _title) {
+        _title = title;
+        emit titleChanged();
+    }
 }
 
 int Notebook::length() const
@@ -72,6 +74,7 @@ QList<QObject*> Notebook::pairs()
 void Notebook::addPage()
 {
     _pages.append(new Page(_pages.count(), false, this));
+    emit lengthChanged();
     emit pagesChanged();
     emit pairsChanged();
 }
@@ -80,6 +83,7 @@ void Notebook::addPage(Page* p)
 {
     p->setParent(this);
     _pages.append(p);
+    emit lengthChanged();
     emit pagesChanged();
     emit pairsChanged();
 }
