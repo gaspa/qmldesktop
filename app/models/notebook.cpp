@@ -4,28 +4,46 @@
 
 Notebook::Notebook(QObject* parent)
     : QObject(parent)
+    , _title()
     , _pages()
 {
-    Page* p = new Page(0, this);
-    p->setTitle("Asdasdfasdf");
-    p->setDate(QDate::currentDate());
-    p->setBody("lkjjljkjlj\nklkjlkj");
-    _pages.append(p);
-    emit pagesChanged();
-    p = new Page(1, this);
-    p->setTitle("pagina 2");
-    p->setDate(QDate::currentDate());
-    p->setBody("testo di pagina 2");
-    _pages.append(p);
-    emit pagesChanged();
 }
 
-QString Notebook::title()
+QVariantMap Notebook::toMap()
 {
-    return "Memories";
+    QVariantMap map;
+    QVariantList pages;
+    map.insert("title", title());
+    for (auto page : _pages)
+        pages.append(page->toMap());
+    map.insert("pages", pages);
+    return map;
 }
 
-int Notebook::length()
+Notebook* Notebook::fromMap(QVariantMap map, QObject* parent)
+{
+    Notebook* n = new Notebook(parent);
+    n->setTitle(map.value("title").toString());
+    for (auto page : map.value("pages").toList()) {
+        Page* p = Page::fromMap(page.toMap(), n);
+        n->addPage(p);
+    }
+
+    return n;
+}
+
+QString Notebook::title() const
+{
+    return _title;
+}
+
+void Notebook::setTitle(QString title)
+{
+    _title = title;
+    emit titleChanged();
+}
+
+int Notebook::length() const
 {
     return _pages.length();
 }
@@ -53,7 +71,15 @@ QList<QObject*> Notebook::pairs()
 
 void Notebook::addPage()
 {
-    _pages.append(new Page(_pages.count(), this));
+    _pages.append(new Page(_pages.count(), false, this));
+    emit pagesChanged();
+    emit pairsChanged();
+}
+
+void Notebook::addPage(Page* p)
+{
+    p->setParent(this);
+    _pages.append(p);
     emit pagesChanged();
     emit pairsChanged();
 }
