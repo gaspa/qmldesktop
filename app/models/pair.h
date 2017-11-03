@@ -10,11 +10,15 @@ class Pair : public QObject {
 public:
     explicit Pair(Page* left, Page* right, QObject* parent = nullptr);
 
-    Q_PROPERTY(Page* left READ left)
-    Q_PROPERTY(Page* right READ right)
+    Q_PROPERTY(Page* left READ left NOTIFY leftChanged)
+    Q_PROPERTY(Page* right READ right NOTIFY rightChanged)
 
     Page* left();
     Page* right();
+
+signals:
+    void leftChanged();
+    void rightChanged();
 
 private:
     Page* _left;

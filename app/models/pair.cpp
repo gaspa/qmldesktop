@@ -5,6 +5,8 @@ Pair::Pair(Page* left, Page* right, QObject* parent)
 {
     _left = left;
     _right = right;
+    connect(_left, SIGNAL(pageChanged()), this, SIGNAL(leftChanged()));
+    connect(_right, SIGNAL(pageChanged()), this, SIGNAL(rightChanged()));
 }
 
 Page* Pair::left()
