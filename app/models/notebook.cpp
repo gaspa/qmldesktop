@@ -42,8 +42,10 @@ QList<QObject*> Notebook::pages()
 QList<QObject*> Notebook::pairs()
 {
     QList<QObject*> list;
-    for (int i = 0; i < _pages.length() / 2; i++) {
-        Pair* p = new Pair(_pages.at(i * 2), _pages.at(i * 2 + 1), this);
+    for (int i = 0; i < (_pages.length() + 1) / 2; i++) {
+        // dont-like
+        Pair* p = new Pair(_pages.at(i * 2),
+            _pages.length() > i * 2 + 1 ? _pages.at(i * 2 + 1) : new Page(-1, true), this);
         list.append(p);
     }
     return list;
@@ -53,4 +55,5 @@ void Notebook::addPage()
 {
     _pages.append(new Page(_pages.count(), this));
     emit pagesChanged();
+    emit pairsChanged();
 }
