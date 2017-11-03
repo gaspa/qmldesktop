@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
-        <file>qml/qtquickcontrols2.conf</file>
+        <file>qtquickcontrols2.conf</file>
         <file>qml/StickyNote.qml</file>
         <file>qml/StickyGrid.qml</file>
         <file>desktop_bg.jpg</file>
