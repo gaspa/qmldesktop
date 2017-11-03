@@ -1,18 +1,34 @@
 #include "page.h"
 
-Page::Page(int pagenumber, QObject* parent)
+Page::Page(int pagenumber, bool empty, QObject* parent)
     : QObject(parent)
+    , _empty(empty)
 {
     _pagenumber = pagenumber;
 }
 
-QVariantMap Page::toMap()
+bool Page::empty() const
+{
+    return _empty;
+}
+
+QVariantMap Page::toMap() const
 {
     QVariantMap map;
+    map.insert("pagenumber", _pagenumber);
     map.insert("title", _title);
     map.insert("body", _body);
     map.insert("date", _date);
     return map;
+}
+
+Page* Page::fromMap(QVariantMap map, QObject* parent)
+{
+    Page* p = new Page(map.value("pagenumber").toInt(), parent);
+    p->setTitle(map.value("title").toString());
+    p->setBody(map.value("body").toString());
+    p->setDate(map.value("date").toDate());
+    return p;
 }
 
 int Page::pagenumber()
