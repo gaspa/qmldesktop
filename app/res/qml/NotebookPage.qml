@@ -4,7 +4,7 @@ import QtQuick.Controls 1.4 as C1
 import QtQuick.Controls 2.2
 
 ColumnLayout{
-    property var page: {}
+    property var page: ({})
 
 
     RowLayout{
@@ -74,16 +74,17 @@ ColumnLayout{
         TextEdit{
             id: bodyTextEdit
             text: page.body
-            anchors.centerIn: parent
+            anchors.fill: parent
             onTextChanged: {
                 page.body = text
             }
 
-            property string placeholderText: "Enter new title here..."
+            property string placeholderText: "Enter new text here..."
             Text {
                 text: bodyTextEdit.placeholderText
-                color: "#aaa"
+                color: "lightgrey"
                 visible: !bodyTextEdit.text
+                anchors.centerIn: parent
             }
         }
     }

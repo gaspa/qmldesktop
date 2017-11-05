@@ -81,7 +81,10 @@ Notebook* Desktop::notebook() const
     return _notebook;
 }
 
-QList<StickyNote*> Desktop::stickynotes() const
+QList<QObject*> Desktop::stickynotes() const
 {
-    return _stickynotes;
+    QList<QObject*> list;
+    for (auto note : _stickynotes)
+        list.append(note);
+    return list;
 }

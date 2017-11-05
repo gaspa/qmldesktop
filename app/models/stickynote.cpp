@@ -2,6 +2,7 @@
 
 StickyNote::StickyNote(QObject* parent)
     : QObject(parent)
+    , _color("yellow")
 {
 }
 

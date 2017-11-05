@@ -64,7 +64,9 @@ ApplicationWindow {
                 anchors.fill: parent
                 onClicked: {
                     console.log("showing new sticky note")
-                    stickyNoteEditor.open()
+                    desktopModel.addStickyNote()
+                    stickyNoteEditor.stickynoteModel = desktopModel.stickynotes[0]
+                    stickyNoteDialog.open()
                 }
             }
         }
@@ -72,6 +74,17 @@ ApplicationWindow {
 
         // StickyThumbs
         // StickyNotes (just thumbs, with elided text) positioned around the desktop
+//        Repeater{
+//            model: desktopModel.stickynotes
+//            StickyNote{
+//                stickynoteModel: modelData
+//                isEditor: false
+//                width: 200
+//                height: 200
+//                rotation: index*10
+//            }
+//        }
+
 
         // Notebook:
         Notebook{
@@ -82,7 +95,8 @@ ApplicationWindow {
         }
 
         Dialog{
-            id: stickyNoteEditor
+
+            id: stickyNoteDialog
             parent: ApplicationWindow.overlay
             x: (parent.width - width) / 2
             y: (parent.height - height) / 2
@@ -91,14 +105,11 @@ ApplicationWindow {
             modal: true
 
             StickyNote{
+                id: stickyNoteEditor
+                isEditor: true
                 anchors.centerIn: parent
-                title: "asdfasf"
-                body: "asdfasdfasdf"
+                stickynoteModel: stickynoteModel
             }
         }
-
     }
-
-
-
 }

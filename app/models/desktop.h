@@ -12,11 +12,11 @@ public:
 
     Q_PROPERTY(QString background READ background NOTIFY backgroundChanged)
     Q_PROPERTY(Notebook* notebook READ notebook NOTIFY notebookChanged)
-    Q_PROPERTY(QList<StickyNote*> stickynotes READ stickynotes NOTIFY stickyChanged)
+    Q_PROPERTY(QList<QObject*> stickynotes READ stickynotes NOTIFY stickyChanged)
 
     QString background() const;
     Notebook* notebook() const;
-    QList<StickyNote*> stickynotes() const;
+    QList<QObject*> stickynotes() const;
 
     QVariantMap toMap() const;
     static Desktop* fromMap(QVariantMap map, QObject* parent);
@@ -24,6 +24,7 @@ public:
 
 public slots:
     void save();
+    void addStickyNote();
 
 signals:
     void backgroundChanged();
@@ -35,7 +36,6 @@ private:
     QList<StickyNote*> _stickynotes;
 
     void addNotebook(Notebook* notebook);
-    void addStickyNote();
 };
 
 #endif // DESKTOP_H
