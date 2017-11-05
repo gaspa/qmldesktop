@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     models/desktop.cpp \
     models/notebook.cpp \
     models/page.cpp \
-    models/pair.cpp
+    models/pair.cpp \
+    models/stickynote.cpp
 
 RESOURCES += res/qml.qrc
 
@@ -35,4 +36,5 @@ HEADERS += \
     models/desktop.h \
     models/notebook.h \
     models/page.h \
-    models/pair.h
+    models/pair.h \
+    models/stickynote.h
