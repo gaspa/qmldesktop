@@ -38,6 +38,11 @@ void Desktop::addNotebook(Notebook* notebook)
         this, SLOT(save()));
 }
 
+void Desktop::addStickyNote()
+{
+    _stickynotes.append(new StickyNote(this));
+}
+
 void Desktop::save()
 {
     qDebug() << "saving";
@@ -74,4 +79,9 @@ QString Desktop::background() const
 Notebook* Desktop::notebook() const
 {
     return _notebook;
+}
+
+QList<StickyNote*> Desktop::stickynotes() const
+{
+    return _stickynotes;
 }
