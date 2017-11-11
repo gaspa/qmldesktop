@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 
@@ -43,8 +43,9 @@ ColumnLayout {
         TextEdit{
             id: noteTitle
             text: stickynoteModel.title
-            anchors.centerIn: parent
-            onTextChanged: {
+            anchors.fill: parent
+            //anchors.centerIn: parent
+            onEditingFinished: {
                 stickynoteModel.title = text
             }
 
@@ -68,7 +69,7 @@ ColumnLayout {
             anchors.fill: parent
             text: stickynoteModel.body
 //            textFormat: TextEdit.RichText
-            onTextChanged: {
+            onEditingFinished: {
                 stickynoteModel.body = text
             }
 

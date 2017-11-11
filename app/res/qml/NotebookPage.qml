@@ -55,7 +55,7 @@ ColumnLayout{
             Layout.fillWidth: true
             text: page.title;
             anchors.centerIn: parent
-            onTextChanged: {
+            onEditingFinished: {
                 page.title = text
             }
 
@@ -75,7 +75,8 @@ ColumnLayout{
             id: bodyTextEdit
             text: page.body
             anchors.fill: parent
-            onTextChanged: {
+            textMargin: 10
+            onEditingFinished: {
                 page.body = text
             }
 
