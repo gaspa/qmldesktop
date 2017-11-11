@@ -10,12 +10,19 @@ Desktop::Desktop(QObject* parent)
     : QObject(parent)
 {
     addNotebook(new Notebook(this));
+
+    connect(this, SIGNAL(stickyChanged()),
+        this, SLOT(save()));
 }
 
 QVariantMap Desktop::toMap() const
 {
     QVariantMap map;
     map.insert("notebook", _notebook->toMap());
+    QVariantList stickynotes;
+    for (auto note : _stickynotes)
+        stickynotes.append(note->toMap());
+    map.insert("stickynotes", stickynotes);
     return map;
 }
 
@@ -23,6 +30,11 @@ Desktop* Desktop::fromMap(QVariantMap map, QObject* parent)
 {
     Desktop* d = new Desktop(parent);
     d->addNotebook(Notebook::fromMap(map.value("notebook").toMap(), d));
+    auto stickynotes = map.value("stickynotes").toList();
+    for (auto variantnote : stickynotes) {
+        StickyNote* s = StickyNote::fromMap(variantnote.toMap(), d);
+        d->addStickyNote(s);
+    }
     return d;
 }
 
@@ -40,7 +52,27 @@ void Desktop::addNotebook(Notebook* notebook)
 
 void Desktop::addStickyNote()
 {
-    _stickynotes.append(new StickyNote(this));
+    StickyNote* s = new StickyNote(this);
+    connect(s, SIGNAL(titleChanged()),
+        this, SIGNAL(stickyChanged()));
+    connect(s, SIGNAL(bodyChanged()),
+        this, SIGNAL(stickyChanged()));
+    connect(s, SIGNAL(colorChanged()),
+        this, SIGNAL(stickyChanged()));
+    _stickynotes.append(s);
+    emit stickyChanged();
+}
+
+void Desktop::addStickyNote(StickyNote* note)
+{
+    connect(note, SIGNAL(titleChanged()),
+        this, SIGNAL(stickyChanged()));
+    connect(note, SIGNAL(bodyChanged()),
+        this, SIGNAL(stickyChanged()));
+    connect(note, SIGNAL(colorChanged()),
+        this, SIGNAL(stickyChanged()));
+    _stickynotes.append(note);
+    emit stickyChanged();
 }
 
 void Desktop::save()

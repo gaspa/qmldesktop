@@ -36,6 +36,7 @@ private:
     QList<StickyNote*> _stickynotes;
 
     void addNotebook(Notebook* notebook);
+    void addStickyNote(StickyNote* note);
 };
 
 #endif // DESKTOP_H

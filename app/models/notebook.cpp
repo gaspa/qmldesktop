@@ -82,6 +82,8 @@ void Notebook::addPage()
 void Notebook::addPage(Page* p)
 {
     p->setParent(this);
+    connect(p, SIGNAL(bodyChanged()), this, SIGNAL(pagesChanged()));
+    connect(p, SIGNAL(titleChanged()), this, SIGNAL(pagesChanged()));
     _pages.append(p);
     emit lengthChanged();
     emit pagesChanged();
