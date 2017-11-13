@@ -11,12 +11,14 @@ public:
 
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(int length READ length NOTIFY lengthChanged)
+    Q_PROPERTY(QString background READ background NOTIFY backgroundChanged)
     Q_PROPERTY(QList<QObject*> pages READ pages NOTIFY pagesChanged)
     Q_PROPERTY(QList<QObject*> pairs READ pairs NOTIFY pairsChanged)
 
     QString title() const;
     void setTitle(QString title);
     int length() const;
+    QString background() const;
     QList<QObject*> pages();
     QList<QObject*> pairs();
 
@@ -26,6 +28,7 @@ public:
 signals:
     void titleChanged();
     void lengthChanged();
+    void backgroundChanged();
     void pagesChanged();
     void pairsChanged();
 
@@ -36,6 +39,7 @@ public slots:
 private:
     QString _title;
     QList<Page*> _pages;
+    QString _background;
 };
 
 #endif // NOTEBOOK_H

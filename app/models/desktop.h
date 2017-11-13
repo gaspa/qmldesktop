@@ -32,6 +32,7 @@ signals:
     void stickyChanged();
 
 private:
+    QString _background;
     Notebook* _notebook;
     QList<StickyNote*> _stickynotes;
 

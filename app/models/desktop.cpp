@@ -8,6 +8,7 @@
 
 Desktop::Desktop(QObject* parent)
     : QObject(parent)
+    , _background()
 {
     addNotebook(new Notebook(this));
 
@@ -18,6 +19,7 @@ Desktop::Desktop(QObject* parent)
 QVariantMap Desktop::toMap() const
 {
     QVariantMap map;
+    map.insert("background", _background);
     map.insert("notebook", _notebook->toMap());
     QVariantList stickynotes;
     for (auto note : _stickynotes)
@@ -29,6 +31,7 @@ QVariantMap Desktop::toMap() const
 Desktop* Desktop::fromMap(QVariantMap map, QObject* parent)
 {
     Desktop* d = new Desktop(parent);
+    d->_background = map.value("background", "").toString();
     d->addNotebook(Notebook::fromMap(map.value("notebook").toMap(), d));
     auto stickynotes = map.value("stickynotes").toList();
     for (auto variantnote : stickynotes) {
@@ -105,7 +108,7 @@ Desktop* Desktop::load(QObject* parent)
 
 QString Desktop::background() const
 {
-    return "qrc:/desktop_bg.jpg";
+    return _background.isEmpty() ? "qrc:/desktop_bg.jpg" : _background;
 }
 
 Notebook* Desktop::notebook() const

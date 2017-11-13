@@ -6,6 +6,7 @@ Notebook::Notebook(QObject* parent)
     : QObject(parent)
     , _title()
     , _pages()
+    , _background()
 {
 }
 
@@ -17,6 +18,7 @@ QVariantMap Notebook::toMap()
     for (auto page : _pages)
         pages.append(page->toMap());
     map.insert("pages", pages);
+    map.insert("background", _background);
     return map;
 }
 
@@ -24,6 +26,7 @@ Notebook* Notebook::fromMap(QVariantMap map, QObject* parent)
 {
     Notebook* n = new Notebook(parent);
     n->setTitle(map.value("title").toString());
+    n->_background = map.value("background").toString();
     for (auto page : map.value("pages").toList()) {
         Page* p = Page::fromMap(page.toMap(), n);
         n->addPage(p);
@@ -48,6 +51,11 @@ void Notebook::setTitle(QString title)
 int Notebook::length() const
 {
     return _pages.length();
+}
+
+QString Notebook::background() const
+{
+    return _background;
 }
 
 QList<QObject*> Notebook::pages()

@@ -5,6 +5,7 @@ Rectangle {
     // Model interface: //
     property string notebookTitle: "Memories";
     property int notebookLength: 0;
+    property string notebookBackground: "";
 
     // end model interface //
 
@@ -28,12 +29,12 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Image{
-                visible: false
+                visible: notebookBackground? true: false
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectFit
                 horizontalAlignment: Image.AlignHCenter
                 verticalAlignment: Image.AlignVCenter
-                source: "qrc:/brina.jpg"
+                source: notebookBackground
             }
 
             Text
