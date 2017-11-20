@@ -11,11 +11,13 @@ class Page : public QObject {
 public:
     explicit Page(int pagenumber, bool empty = false, QObject* parent = nullptr);
 
-    Q_PROPERTY(bool empty READ empty CONSTANT);
+    Q_PROPERTY(bool empty READ empty CONSTANT)
     Q_PROPERTY(int pagenumber READ pagenumber CONSTANT)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QString body READ body WRITE setBody NOTIFY bodyChanged)
     Q_PROPERTY(QDate date READ date WRITE setDate NOTIFY dateChanged)
+
+    operator QString() const;
 
     bool empty() const;
     QVariantMap toMap() const;

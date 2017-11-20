@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 
 ColumnLayout {
     // model interface
-    property var stickynoteModel: ({})
+    property var stickynoteModel: {'title':'','body':'','color':'yellow'}
     property bool isEditor: false
     // end interface
 
@@ -44,7 +44,6 @@ ColumnLayout {
             id: noteTitle
             text: stickynoteModel.title
             anchors.fill: parent
-            //anchors.centerIn: parent
             onEditingFinished: {
                 stickynoteModel.title = text
             }
@@ -68,7 +67,6 @@ ColumnLayout {
             id: stickynoteBodyText
             anchors.fill: parent
             text: stickynoteModel.body
-//            textFormat: TextEdit.RichText
             onEditingFinished: {
                 stickynoteModel.body = text
             }

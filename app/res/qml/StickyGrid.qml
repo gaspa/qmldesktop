@@ -2,36 +2,28 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
-ColumnLayout {
+Rectangle {
     property var blockModel: []
 
-    RowLayout{
-        Layout.fillWidth: true
+    id: noteThumbsRoot
+    width: 400
+    height: 200
+    color: "lightgreen"
 
-        Button {
-            id: addNote
-            text: qsTr("+")
-            onClicked: {
-                blockModel.append({'bodyColor': 'yellow', 'title': 'new note', 'body': '...'});
-                console.log("asdfafs", blockModel)
-            }
-        }
-    }
-
-    GridView {
-        id: gridView
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        cellHeight: 110
-        cellWidth:110
-
+    Repeater{
         model: blockModel
-        delegate: StickyNote{
+        StickyNote{
+            stickynoteModel: modelData
+            isEditor: false
 
-            bodyColor: model.bodyColor
-            title: model.title
-            body: model.body
+            x: 40 -noteThumbsRoot.width/2 + Math.random()*(noteThumbsRoot.width-40)
+            y: 20 -noteThumbsRoot.height + Math.random()*(noteThumbsRoot.height-20)
+            rotation: -90 + Math.random()*180
+            scale: 0.2
+            antialiasing: true
+            onVisibleChanged: {
+                console.log(x,y,width, height, rotation)
+            }
         }
     }
 }

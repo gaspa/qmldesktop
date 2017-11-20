@@ -8,6 +8,11 @@ Page::Page(int pagenumber, bool empty, QObject* parent)
     setDate(QDate::currentDate());
 }
 
+Page::operator QString() const
+{
+    return QString("page: %1 empty: %2").arg(_pagenumber, _empty);
+}
+
 bool Page::empty() const
 {
     return _empty;

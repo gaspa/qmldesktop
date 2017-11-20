@@ -44,9 +44,10 @@ Desktop* Desktop::fromMap(QVariantMap map, QObject* parent)
 void Desktop::addNotebook(Notebook* notebook)
 {
     _notebook = notebook;
+    connect(_notebook, SIGNAL(positionChanged()),
+        this, SLOT(save()));
     connect(_notebook, SIGNAL(pagesChanged()),
         this, SIGNAL(notebookChanged()));
-
     connect(_notebook, SIGNAL(pagesChanged()),
         this, SLOT(save()));
     connect(_notebook, SIGNAL(titleChanged()),

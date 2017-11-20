@@ -34,20 +34,48 @@ ApplicationWindow {
         // ClosedNotebook
         // closed notebook image, clickin on it will open the NoteBook.qml delegate
         NotebookCover {
-            x: 50
-            y: 50
+            id: notebookCover
+            x: desktopModel.notebook.x
+            y: desktopModel.notebook.y
             width: 200
             height: 300
+            color: "white"
             rotation: 10
+
+            property point beginDrag
+            Drag.active: dragArea.drag.active
+            Drag.hotSpot.x: 0
+            Drag.hotSpot.y: 0
+            Drag.dragType: Drag.Automatic
+            Drag.mimeData: {"text/plain": "blabla"}
+            Drag.supportedActions: Qt.CopyAction
+
             // model interface bindinds:
             notebookTitle: desktopModel.notebook.title
             notebookLength: desktopModel.notebook.length
+            notebookBackground: desktopModel.notebook.background
             MouseArea{
+                id: dragArea
                 anchors.fill: parent
-                onClicked: {
-                    console.log("showing notebook")
-                    notebook.visible = true
+                drag.target: parent
+                onPressed: {
+                    notebookCover.beginDrag = Qt.point(parent.x, parent.y)
+                    parent.grabToImage(function(result){
+                        parent.Drag.imageSource = result.url
+                    })
                 }
+
+//                onClicked: {
+//                    console.log("showing notebook")
+//                    notebook.visible = true
+//                }
+            }
+            Drag.onDragStarted: {
+                console.log("started")
+            }
+
+            Drag.onDragFinished:{
+                console.log("asDDFASF");
             }
         }
 
@@ -65,7 +93,7 @@ ApplicationWindow {
                 onClicked: {
                     console.log("showing new sticky note")
                     desktopModel.addStickyNote()
-                    stickyNoteEditor.stickynoteModel = desktopModel.stickynotes[0]
+                    stickyNoteEditor.stickynoteModel = desktopModel.stickynotes[desktopModel.stickynotes.length-1]
                     stickyNoteDialog.open()
                 }
             }
@@ -74,17 +102,14 @@ ApplicationWindow {
 
         // StickyThumbs
         // StickyNotes (just thumbs, with elided text) positioned around the desktop
-//        Repeater{
-//            model: desktopModel.stickynotes
-//            StickyNote{
-//                stickynoteModel: modelData
-//                isEditor: false
-//                width: 200
-//                height: 200
-//                rotation: index*10
-//            }
-//        }
+        StickyGrid{
+            x:300
+            y:10
+            width: 400
+            height: 200
 
+            blockModel: desktopModel.stickynotes
+        }
 
         // Notebook:
         Notebook{
@@ -108,7 +133,6 @@ ApplicationWindow {
                 id: stickyNoteEditor
                 isEditor: true
                 anchors.centerIn: parent
-                stickynoteModel: stickynoteModel
             }
         }
     }

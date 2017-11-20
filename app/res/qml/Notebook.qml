@@ -54,7 +54,8 @@ Pane {
 
                         NotebookPage{
                             page: modelData.left
-                            Layout.maximumWidth: (view.width - 44) / 2
+                            height: parent.height
+                            width: (view.width - 44) / 2
                         }
                         Image{
                             id: screw
@@ -67,7 +68,8 @@ Pane {
                         }
                         NotebookPage{
                             page: modelData.right
-                            Layout.maximumWidth: (view.width - 44) / 2
+                            height: parent.height
+                            width: (view.width - 44) / 2
                         }
                     }
 
